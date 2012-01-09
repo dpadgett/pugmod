@@ -1,0 +1,4 @@
+; dlltool --base-file C:\DOCUME~1\dan\LOCALS~1\Temp/cca00604.base --output-exp cgamex86.exp --dllname cgamex86.dll --output-def libcgamex86.def --exclude-symbol=DllMainCRTStartup@12 --def C:\DOCUME~1\dan\LOCALS~1\Temp/cca00604.def --output-lib libcgamex86.a
+EXPORTS
+	vmMain @ 1
+	dllEntry @ 2

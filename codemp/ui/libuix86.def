@@ -1,0 +1,4 @@
+; dlltool --base-file C:\DOCUME~1\dan\LOCALS~1\Temp/cca02960.base --output-exp uix86.exp --dllname uix86.dll --output-def libuix86.def --exclude-symbol=DllMainCRTStartup@12 --def C:\DOCUME~1\dan\LOCALS~1\Temp/cca02960.def --output-lib libuix86.a
+EXPORTS
+	vmMain @ 1
+	dllEntry @ 2

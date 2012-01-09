@@ -1,0 +1,69 @@
+# Project: ui
+# Makefile created by Dev-C++ 4.9.9.2
+
+CPP  = g++.exe
+CC   = gcc.exe
+WINDRES = windres.exe
+RES  = obj/ui_private.res
+OBJ  = obj/bg_misc.o obj/bg_saga.o obj/bg_vehicleLoad.o obj/bg_weapons.o obj/q_math.o obj/q_shared.o obj/ui_atoms.o obj/ui_force.o obj/ui_gameinfo.o obj/ui_main.o obj/ui_saber.o obj/ui_shared.o obj/ui_syscalls.o $(RES)
+LINKOBJ  = obj/bg_misc.o obj/bg_saga.o obj/bg_vehicleLoad.o obj/bg_weapons.o obj/q_math.o obj/q_shared.o obj/ui_atoms.o obj/ui_force.o obj/ui_gameinfo.o obj/ui_main.o obj/ui_saber.o obj/ui_shared.o obj/ui_syscalls.o $(RES)
+LIBS =  -L"D:/Dev-Cpp/lib"  -s -march=i686 -mmmx 
+INCS =  -I"D:/Dev-Cpp/include" 
+CXXINCS =  -I"D:/Dev-Cpp/lib/gcc/mingw32/3.4.2/include"  -I"D:/Dev-Cpp/include/c++/3.4.2/backward"  -I"D:/Dev-Cpp/include/c++/3.4.2/mingw32"  -I"D:/Dev-Cpp/include/c++/3.4.2"  -I"D:/Dev-Cpp/include" 
+BIN  = uix86.exe
+CXXFLAGS = $(CXXINCS) -D__GNUWIN32__ -Wall -finline-functions -mcpu=pentiumpro -D_M_IX86=600 -DNDEBUG -DWIN32 -D_WINDOWS -DMISSIONPACK -D_JK2 -DCGAME -fexceptions   -lcomctl32 -lgdi32 -fexpensive-optimizations -O3 -march=i686 -mmmx
+CFLAGS = $(INCS) -DGNUC -Wall -finline-functions -mcpu=pentiumpro -D_M_IX86=600 -DNDEBUG -DMISSIONPACK -D_JK2 -DUI_EXPORTS -fexceptions -D__linux__ -Dmaxfix -Dexe   -lcomctl32 -lgdi32 -fexpensive-optimizations -O3 -march=i686 -mmmx
+RM = rm -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before uix86.exe all-after
+
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CPP) $(LINKOBJ) -o "uix86.exe" $(LIBS)
+
+obj/bg_misc.o: ../game/bg_misc.c
+	$(CC) -c ../game/bg_misc.c -o obj/bg_misc.o $(CFLAGS)
+
+obj/bg_saga.o: ../game/bg_saga.c
+	$(CC) -c ../game/bg_saga.c -o obj/bg_saga.o $(CFLAGS)
+
+obj/bg_vehicleLoad.o: ../game/bg_vehicleLoad.c
+	$(CC) -c ../game/bg_vehicleLoad.c -o obj/bg_vehicleLoad.o $(CFLAGS)
+
+obj/bg_weapons.o: ../game/bg_weapons.c
+	$(CC) -c ../game/bg_weapons.c -o obj/bg_weapons.o $(CFLAGS)
+
+obj/q_math.o: ../game/q_math.c
+	$(CC) -c ../game/q_math.c -o obj/q_math.o $(CFLAGS)
+
+obj/q_shared.o: ../game/q_shared.c
+	$(CC) -c ../game/q_shared.c -o obj/q_shared.o $(CFLAGS)
+
+obj/ui_atoms.o: ui_atoms.c
+	$(CC) -c ui_atoms.c -o obj/ui_atoms.o $(CFLAGS)
+
+obj/ui_force.o: ui_force.c
+	$(CC) -c ui_force.c -o obj/ui_force.o $(CFLAGS)
+
+obj/ui_gameinfo.o: ui_gameinfo.c
+	$(CC) -c ui_gameinfo.c -o obj/ui_gameinfo.o $(CFLAGS)
+
+obj/ui_main.o: ui_main.c
+	$(CC) -c ui_main.c -o obj/ui_main.o $(CFLAGS)
+
+obj/ui_saber.o: ui_saber.c
+	$(CC) -c ui_saber.c -o obj/ui_saber.o $(CFLAGS)
+
+obj/ui_shared.o: ui_shared.c
+	$(CC) -c ui_shared.c -o obj/ui_shared.o $(CFLAGS)
+
+obj/ui_syscalls.o: ui_syscalls.c
+	$(CC) -c ui_syscalls.c -o obj/ui_syscalls.o $(CFLAGS)
+
+obj/ui_private.res: ui_private.rc ../win32/ui.rc 
+	$(WINDRES) -i ui_private.rc --input-format=rc -o obj/ui_private.res -O coff 

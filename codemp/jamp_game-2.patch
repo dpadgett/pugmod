@@ -1,0 +1,540 @@
+diff -urN codemp/game/Makefile mycodemp/game/Makefile
+--- codemp/game/Makefile	1969-12-31 18:00:00.000000000 -0600
++++ mycodemp/game/Makefile	2003-11-29 00:57:34.000000000 -0600
+@@ -0,0 +1,26 @@
++# Linux Makefile for Jedi Academy MP SDK
++# By Patrick Hemmer
++# Version 2
++# 
++# Created Nov 29, 2003
++# The Void - http://www.divoid.net
++#
++# You may set your own optimizations on the CFLAGS line. If you dont know what optimizations are, then just leave it as is.
++# Run 'make' to compile the code, once done, you will have a file called 'jampgamei386.so' in the 'game' directory. Copy this file to the 'base' folder of your server or to your mod folder.
++# If for some strange reason, you are running on less than a 586 processor, change the i586 to i386 on the CFLAGS line.
++
++CC = gcc
++CFLAGS = -I../cgame -I../ui -I../qcommon -I../server -I../icarus -I../ghoul2 -fPIC -DMISSIONPACK -DQAGAME -DQ3_VM -D_JK2MP -march=i586 -O3
++TARGET = jampgamei386.so
++
++OFILES = AnimalNPC.o FighterNPC.o NPC.o NPC_AI_Atst.o NPC_AI_Default.o NPC_AI_Droid.o NPC_AI_GalakMech.o NPC_AI_Grenadier.o NPC_AI_Howler.o NPC_AI_ImperialProbe.o NPC_AI_Interrogator.o NPC_AI_Jedi.o NPC_AI_Mark1.o NPC_AI_Mark2.o NPC_AI_MineMonster.o NPC_AI_Rancor.o NPC_AI_Remote.o NPC_AI_Seeker.o NPC_AI_Sentry.o NPC_AI_Sniper.o NPC_AI_Stormtrooper.o NPC_AI_Utils.o NPC_AI_Wampa.o NPC_behavior.o NPC_combat.o NPC_goal.o NPC_misc.o NPC_move.o NPC_reactions.o NPC_senses.o NPC_sounds.o NPC_spawn.o NPC_stats.o NPC_utils.o SpeederNPC.o WalkerNPC.o ai_main.o ai_util.o ai_wpnav.o bg_g2_utils.o bg_misc.o bg_panimate.o bg_pmove.o bg_saber.o bg_saberLoad.o bg_saga.o bg_slidemove.o bg_vehicleLoad.o bg_weapons.o g_ICARUScb.o g_active.o g_arenas.o g_bot.o g_client.o g_cmds.o g_combat.o g_exphysics.o g_items.o g_log.o g_main.o g_mem.o g_misc.o g_missile.o g_mover.o g_nav.o g_navnew.o g_object.o g_saga.o g_session.o g_spawn.o g_strap.o g_svcmds.o g_syscalls.o g_target.o g_team.o g_timer.o g_trigger.o g_turret.o g_turret_G2.o g_utils.o g_vehicleTurret.o g_vehicles.o g_weapon.o q_math.o q_shared.o tri_coll_test.o w_force.o w_saber.o 
++
++$(TARGET): $(OFILES)
++	$(CC) -shared -o $(TARGET) $(OFILES) -lm
++
++.c.o:
++	$(CC) $(CFLAGS) -c $*.c -o $*.o
++
++clean:
++	rm -f $(OFILES)
++	rm -f $(TARGET)
+diff -urN codemp/game/bg_lib.h mycodemp/game/bg_lib.h
+--- codemp/game/bg_lib.h	2003-10-31 09:41:38.000000000 -0600
++++ mycodemp/game/bg_lib.h	2003-11-29 01:02:14.000000000 -0600
+@@ -39,7 +39,7 @@
+ int strcmp( const char *string1, const char *string2 );
+ char *strchr( const char *string, int c );
+ char *strstr( const char *string, const char *strCharSet );
+-char *strncpy( char *strDest, const char *strSource, size_t count );
++//char *strncpy( char *strDest, const char *strSource, size_t count );
+ int tolower( int c );
+ int toupper( int c );
+ 
+@@ -53,8 +53,8 @@
+ 
+ // Memory functions
+ void *memmove( void *dest, const void *src, size_t count );
+-void *memset( void *dest, int c, size_t count );
+-void *memcpy( void *dest, const void *src, size_t count );
++//void *memset( void *dest, int c, size_t count );
++//void *memcpy( void *dest, const void *src, size_t count );
+ 
+ // Math functions
+ double ceil( double x );
+diff -urN codemp/game/bg_pmove.c mycodemp/game/bg_pmove.c
+--- codemp/game/bg_pmove.c	2003-10-31 09:41:38.000000000 -0600
++++ mycodemp/game/bg_pmove.c	2003-11-29 01:12:54.000000000 -0600
+@@ -709,7 +709,7 @@
+ 
+ // Following couple things don't belong in the DLL namespace!
+ #ifdef QAGAME
+-typedef struct gentity_s gentity_t;
++//typedef struct gentity_s gentity_t;
+ gentity_t *G_PlayEffectID(const int fxID, vec3_t org, vec3_t ang);
+ #endif
+ 
+@@ -11062,11 +11062,11 @@
+ 		PM_HoverTrace();
+ 	}
+ 	PM_SetWaterLevel();
+-	if (pm->cmd.forcesel != -1 && (pm->ps->fd.forcePowersKnown & (1 << pm->cmd.forcesel)))
++	if (/*pm->cmd.forcesel != -1 && */(pm->ps->fd.forcePowersKnown & (1 << pm->cmd.forcesel)))
+ 	{
+ 		pm->ps->fd.forcePowerSelected = pm->cmd.forcesel;
+ 	}
+-	if (pm->cmd.invensel != -1 && (pm->ps->stats[STAT_HOLDABLE_ITEMS] & (1 << pm->cmd.invensel)))
++	if (/*pm->cmd.invensel != -1 && */(pm->ps->stats[STAT_HOLDABLE_ITEMS] & (1 << pm->cmd.invensel)))
+ 	{
+ 		pm->ps->stats[STAT_HOLDABLE_ITEM] = BG_GetItemIndexByTag(pm->cmd.invensel, IT_HOLDABLE);
+ 	}
+diff -urN codemp/game/bg_public.h mycodemp/game/bg_public.h
+--- codemp/game/bg_public.h	2003-10-31 09:41:38.000000000 -0600
++++ mycodemp/game/bg_public.h	2003-11-29 01:10:13.000000000 -0600
+@@ -180,7 +180,7 @@
+ //for supplier class items
+ #define TOSS_DEBOUNCE_TIME				5000
+ 
+-typedef enum {
++enum {
+ 	GT_FFA,				// free for all
+ 	GT_HOLOCRON,		// holocron ffa
+ 	GT_JEDIMASTER,		// jedi master
+@@ -206,7 +206,7 @@
+ extern int forcePowerSorted[NUM_FORCE_POWERS];
+ #include "../namespace_end.h"
+ 
+-typedef enum
++enum
+ {
+ 	SABERLOCK_TOP,
+ 	SABERLOCK_SIDE,
+@@ -217,7 +217,7 @@
+ 	SABERLOCK_LOSE
+ };
+ 
+-typedef enum
++enum
+ {
+ 	DIR_RIGHT,
+ 	DIR_LEFT,
+@@ -380,7 +380,7 @@
+ } weaponstate_t;
+ 
+ 
+-typedef enum {
++enum {
+ 	FORCE_MASTERY_UNINITIATED,
+ 	FORCE_MASTERY_INITIATE,
+ 	FORCE_MASTERY_PADAWAN,
+@@ -420,7 +420,7 @@
+ 
+ #define	MAXTOUCH	32
+ 
+-typedef struct bgEntity_s
++struct bgEntity_s
+ {
+ 	entityState_t	s;
+ 	playerState_t	*playerState;
+@@ -430,7 +430,7 @@
+ 	vec3_t			modelScale; //needed for g2 collision
+ 
+ 	//Data type(s) must directly correspond to the head of the gentity and centity structures
+-} bgEntity_t;
++};
+ 
+ typedef struct {
+ 	// state (in / out)
+@@ -649,7 +649,7 @@
+ } effectTypes_t;
+ 
+ // NOTE: may not have more than 16
+-typedef enum {
++enum {
+ 	PW_NONE,
+ 
+ 	PW_QUAD,
+@@ -683,7 +683,7 @@
+ };
+ typedef int powerup_t;
+ 
+-typedef enum {
++enum {
+ 	HI_NONE,
+ 
+ 	HI_SEEKER,
+@@ -1006,7 +1006,7 @@
+ 
+ 
+ 
+-typedef enum {
++enum {
+ 	TEAM_FREE,
+ 	TEAM_RED,
+ 	TEAM_BLUE,
+@@ -1100,7 +1100,7 @@
+ //---------------------------------------------------------
+ 
+ // gitem_t->type
+-typedef enum {
++enum {
+ 	IT_BAD,
+ 	IT_WEAPON,				// EFX: rotate + upscale + minlight
+ 	IT_AMMO,				// EFX: rotate
+@@ -1284,7 +1284,7 @@
+ #undef LS_NONE
+ #endif
+ 
+-typedef enum {
++enum {
+ 	//totally invalid
+ 	LS_INVALID	= -1,
+ 	// Invalid, or saber not armed
+diff -urN codemp/game/bg_vehicles.h mycodemp/game/bg_vehicles.h
+--- codemp/game/bg_vehicles.h	2003-10-31 09:41:40.000000000 -0600
++++ mycodemp/game/bg_vehicles.h	2003-11-29 01:08:15.000000000 -0600
+@@ -403,7 +403,7 @@
+ #define	VEH_MOUNT_THROW_RIGHT		-6
+ 
+ 
+-typedef enum
++enum
+ {
+ 	VEH_EJECT_LEFT, 
+ 	VEH_EJECT_RIGHT, 
+@@ -474,7 +474,7 @@
+ } vehTurretStatus_t;
+ // This is the implementation of the vehicle interface and any of the other variables needed. This
+ // is what actually represents a vehicle. -AReis.
+-typedef struct Vehicle_s
++struct Vehicle_s
+ {
+ 	// The entity who pilots/drives this vehicle.
+ 	// NOTE: This is redundant (since m_pParentEntity->owner _should_ be the pilot). This makes things clearer though.
+@@ -620,7 +620,7 @@
+ 	//the guy who was previously the pilot
+ 	bgEntity_t *	m_pOldPilot;
+ 
+-} Vehicle_t;
++};
+ 
+ #include "../namespace_begin.h"
+ extern int BG_VehicleGetIndex( const char *vehicleName );
+diff -urN codemp/game/bg_weapons.h mycodemp/game/bg_weapons.h
+--- codemp/game/bg_weapons.h	2003-10-31 09:41:40.000000000 -0600
++++ mycodemp/game/bg_weapons.h	2003-11-29 01:04:58.000000000 -0600
+@@ -5,7 +5,7 @@
+ #ifndef __WEAPONS_H__
+ #define __WEAPONS_H__
+ 
+-typedef enum {
++enum {
+ 	WP_NONE,
+ 
+ 	WP_STUN_BATON,
+diff -urN codemp/game/g_ICARUScb.c mycodemp/game/g_ICARUScb.c
+--- codemp/game/g_ICARUScb.c	2003-10-31 09:41:42.000000000 -0600
++++ mycodemp/game/g_ICARUScb.c	2003-11-29 01:06:40.000000000 -0600
+@@ -27,7 +27,7 @@
+ // so that we only get the C version of the includes (no full Icarus) in that
+ // scenario, but I think we'll just try to leave this out instead.
+ #ifndef _XBOX
+-#ifndef __linux__
++//#ifndef __linux__
+ enum
+ {
+ 	TK_EOF = -1,
+@@ -42,7 +42,7 @@
+ 	TK_IDENTIFIER,
+ 	TK_USERDEF,
+ };
+-#endif
++//#endif
+ #endif
+ 
+ #include "../icarus/interpreter.h"
+diff -urN codemp/game/g_active.c mycodemp/game/g_active.c
+--- codemp/game/g_active.c	2003-10-31 09:41:40.000000000 -0600
++++ mycodemp/game/g_active.c	2003-11-29 01:13:31.000000000 -0600
+@@ -1650,7 +1650,7 @@
+ 	(*ucmd)->upmove = 0;
+ }
+ 
+-typedef enum
++enum
+ {
+ 	TAUNT_TAUNT = 0,
+ 	TAUNT_BOW,
+diff -urN codemp/game/g_arenas.c mycodemp/game/g_arenas.c
+--- codemp/game/g_arenas.c	2003-10-31 09:41:42.000000000 -0600
++++ mycodemp/game/g_arenas.c	2003-11-29 01:13:42.000000000 -0600
+@@ -340,4 +340,5 @@
+ 		podium1->think = CelebrateStop;
+ 	}
+ }
+-*/
+\ No newline at end of file
++*/
++
+diff -urN codemp/game/g_local.h mycodemp/game/g_local.h
+--- codemp/game/g_local.h	2003-11-19 13:44:38.000000000 -0600
++++ mycodemp/game/g_local.h	2003-11-29 01:11:07.000000000 -0600
+@@ -95,7 +95,7 @@
+ 
+ #define SP_PODIUM_MODEL		"models/mapobjects/podium/podium4.md3"
+ 
+-typedef enum 
++enum 
+ {
+ 	HL_NONE = 0,
+ 	HL_FOOT_RT,
+@@ -363,7 +363,7 @@
+ #define DAMAGEREDIRECT_RLEG		2
+ #define DAMAGEREDIRECT_LLEG		3
+ 
+-typedef enum {
++enum {
+ 	CON_DISCONNECTED,
+ 	CON_CONNECTING,
+ 	CON_CONNECTED
+diff -urN codemp/game/g_main.c mycodemp/game/g_main.c
+--- codemp/game/g_main.c	2003-11-13 15:48:40.000000000 -0600
++++ mycodemp/game/g_main.c	2003-11-29 01:06:40.000000000 -0600
+@@ -497,9 +497,9 @@
+ ================
+ */
+ #include "../namespace_begin.h"
+-#ifdef __linux__
++/*#ifdef __linux__
+ extern "C" {
+-#endif
++#endif*/
+ int vmMain( int command, int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11  ) {
+ 	switch ( command ) {
+ 	case GAME_INIT:
+@@ -682,9 +682,9 @@
+ 
+ 	return -1;
+ }
+-#ifdef __linux__
++/*#ifdef __linux__
+ }
+-#endif
++#endif*/
+ #include "../namespace_end.h"
+ 
+ 
+@@ -4101,4 +4101,4 @@
+ 	static char text[1024]={0};
+ 	Com_sprintf(text, sizeof(text), "@@@%s", refName);
+ 	return text;
+-}
+\ No newline at end of file
++}
+diff -urN codemp/game/g_public.h mycodemp/game/g_public.h
+--- codemp/game/g_public.h	2003-10-31 09:41:44.000000000 -0600
++++ mycodemp/game/g_public.h	2003-11-29 01:06:40.000000000 -0600
+@@ -672,7 +672,7 @@
+ 
+ #define MAX_FAILED_NODES 8
+ 
+-typedef struct Vehicle_s Vehicle_t;
++//typedef struct Vehicle_s Vehicle_t;
+ 
+ // the server looks at a sharedEntity, which is the start of the game's gentity_t structure
+ //mod authors should not touch this struct
+diff -urN codemp/game/g_syscalls.c mycodemp/game/g_syscalls.c
+--- codemp/game/g_syscalls.c	2003-10-31 09:41:44.000000000 -0600
++++ mycodemp/game/g_syscalls.c	2003-11-29 01:06:40.000000000 -0600
+@@ -8,15 +8,15 @@
+ static int (QDECL *syscall)( int arg, ... ) = (int (QDECL *)( int, ...))-1;
+ 
+ #include "../namespace_begin.h"
+-#ifdef __linux__
++/*#ifdef __linux__
+ extern "C" {
+-#endif
++#endif*/
+ void dllEntry( int (QDECL *syscallptr)( int arg,... ) ) {
+ 	syscall = syscallptr;
+ }
+-#ifdef __linux__
++/*#ifdef __linux__
+ }
+-#endif
++#endif*/
+ 
+ int PASSFLOAT( float x ) {
+ 	float	floatTemp;
+diff -urN codemp/game/g_trigger.c mycodemp/game/g_trigger.c
+--- codemp/game/g_trigger.c	2003-10-31 09:41:46.000000000 -0600
++++ mycodemp/game/g_trigger.c	2003-11-29 01:14:24.000000000 -0600
+@@ -1976,4 +1976,5 @@
+ 	self->nextthink = level.time + 100;
+ 
+     trap_LinkEntity(self);
+-}
+\ No newline at end of file
++}
++
+diff -urN codemp/game/q_shared.h mycodemp/game/q_shared.h
+--- codemp/game/q_shared.h	2003-10-31 09:41:52.000000000 -0600
++++ mycodemp/game/q_shared.h	2003-11-29 01:07:33.000000000 -0600
+@@ -255,13 +255,11 @@
+ static inline float LittleFloat (const float l) { return FloatSwap(&l); }
+ 
+ #endif
+-
+ //======================= LINUX DEFINES =================================
+ 
+ // the mac compiler can't handle >32k of locals, so we
+ // just waste space and make big arrays static...
+ #ifdef __linux__
+-
+ // bk001205 - from Makefile
+ #define stricmp strcasecmp
+ 
+@@ -574,7 +572,7 @@
+ 
+ 
+ 
+-typedef enum
++enum
+ {
+ 	SABER_RED,
+ 	SABER_ORANGE,
+@@ -587,7 +585,7 @@
+ };
+ typedef int saber_colors_t;
+ 
+-typedef enum
++enum
+ {
+ 	FP_FIRST = 0,//marker
+ 	FP_HEAL = 0,//instant
+@@ -840,7 +838,7 @@
+ } saberInfo_t;
+ #define MAX_SABERS 2
+ 
+-typedef enum
++enum
+ {
+ 	FORCE_LEVEL_0,
+ 	FORCE_LEVEL_1,
+@@ -964,7 +962,7 @@
+ };
+ 
+ //material stuff needs to be shared
+-typedef enum //# material_e
++enum //# material_e
+ {
+ 	MAT_METAL = 0,	// scorched blue-grey metal
+ 	MAT_GLASS,		// not a real chunk type, just plays an effect with glass sprites
+@@ -1239,7 +1237,7 @@
+ signed char ClampChar( int i );
+ signed short ClampShort( int i );
+ 
+-float powf ( float x, int y );
++//float powf ( float x, int y );
+ 
+ // this isn't a real cheap function to call!
+ int DirToByte( vec3_t dir );
+@@ -1942,7 +1940,7 @@
+ // sound channels
+ // channel 0 never willingly overrides
+ // other channels will allways override a playing sound on that channel
+-typedef enum {
++enum {
+ 	CHAN_AUTO,	//## %s !!"W:\game\base\!!sound\*.wav;*.mp3" # Auto-picks an empty channel to play sound on
+ 	CHAN_LOCAL,	//## %s !!"W:\game\base\!!sound\*.wav;*.mp3" # menu sounds, etc
+ 	CHAN_WEAPON,//## %s !!"W:\game\base\!!sound\*.wav;*.mp3" 
+@@ -3029,7 +3027,7 @@
+ #define AS_MPLAYER			3 // (Obsolete)
+ 
+ // cinematic states
+-typedef enum {
++enum {
+ 	FMV_IDLE,
+ 	FMV_PLAY,		// play
+ 	FMV_EOF,		// all other conditions, i.e. stop/EOF/abort
+@@ -3040,7 +3038,7 @@
+ };
+ typedef int e_status;
+ 
+-typedef enum _flag_status {
++enum _flag_status {
+ 	FLAG_ATBASE = 0,
+ 	FLAG_TAKEN,			// CTF
+ 	FLAG_TAKEN_RED,		// One Flag CTF
+@@ -3083,7 +3081,7 @@
+ 
+ // For ghoul2 axis use
+ 
+-typedef enum Eorientations
++enum Eorientations
+ {
+ 	ORIGIN = 0, 
+ 	POSITIVE_X,
+@@ -3101,7 +3099,7 @@
+ // define the new memory tags for the zone, used by all modules now
+ //
+ #define TAGDEF(blah) TAG_ ## blah
+-typedef enum {
++enum {
+ 	#include "../qcommon/tags.h"
+ };
+ typedef char memtag_t;
+diff -urN codemp/game/teams.h mycodemp/game/teams.h
+--- codemp/game/teams.h	2003-10-31 09:41:54.000000000 -0600
++++ mycodemp/game/teams.h	2003-11-29 01:01:44.000000000 -0600
+@@ -1,7 +1,7 @@
+ #ifndef TEAMS_H
+ #define TEAMS_H
+ 
+-typedef enum //# team_e
++enum //# team_e
+ {
+ 	NPCTEAM_FREE,			// also TEAM_FREE - caution, some code checks a team_t via "if (!team_t_varname)" so I guess this should stay as entry 0, great or what? -slc
+ 	NPCTEAM_ENEMY,			// also TEAM_RED
+diff -urN codemp/game/tri_coll_test.c mycodemp/game/tri_coll_test.c
+--- codemp/game/tri_coll_test.c	2003-10-31 09:41:54.000000000 -0600
++++ mycodemp/game/tri_coll_test.c	2003-11-29 01:14:50.000000000 -0600
+@@ -289,4 +289,5 @@
+ 
+   if(isect1[1]<isect2[0] || isect2[1]<isect1[0]) return qtrue;
+   return qfalse;
+-}
+\ No newline at end of file
++}
++
+diff -urN codemp/game/w_saber.h mycodemp/game/w_saber.h
+--- codemp/game/w_saber.h	2003-10-31 09:41:54.000000000 -0600
++++ mycodemp/game/w_saber.h	2003-11-29 01:11:03.000000000 -0600
+@@ -32,7 +32,7 @@
+ #define FORCE_LIGHTNING_RADIUS 300
+ #define MAX_DRAIN_DISTANCE 512
+ 
+-typedef enum
++enum
+ {
+ 	FJ_FORWARD,
+ 	FJ_BACKWARD,
+diff -urN codemp/icarus/interpreter.h mycodemp/icarus/interpreter.h
+--- codemp/icarus/interpreter.h	2003-10-31 09:41:58.000000000 -0600
++++ mycodemp/icarus/interpreter.h	2003-11-29 00:33:27.000000000 -0600
+@@ -220,5 +220,5 @@
+ 	static keywordArray_t	m_conditionalKeywords[];	//Conditional
+ };
+ 
+-#endif __cplusplus
++#endif  //__cplusplus
+ #endif	//__INTERPRETER__
+diff -urN codemp/namespace_begin.h mycodemp/namespace_begin.h
+--- codemp/namespace_begin.h	2003-10-31 09:41:18.000000000 -0600
++++ mycodemp/namespace_begin.h	2003-11-29 00:26:00.000000000 -0600
+@@ -12,4 +12,4 @@
+ // #error Including namespace_begin.h, but not in UI/GAME/CGAME
+ #endif
+ 
+-#endif // _XBOX
+\ No newline at end of file
++#endif // _XBOX
+diff -urN codemp/namespace_end.h mycodemp/namespace_end.h
+--- codemp/namespace_end.h	2003-10-31 09:41:18.000000000 -0600
++++ mycodemp/namespace_end.h	2003-11-29 00:26:24.000000000 -0600
+@@ -14,4 +14,4 @@
+ //#error Including namespace_end.h, but not in UI/GAME/CGAME
+ #endif
+ 
+-#endif _XBOX
+\ No newline at end of file
++#endif //_XBOX

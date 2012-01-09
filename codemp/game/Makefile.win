@@ -1,0 +1,301 @@
+# Project: game
+# Makefile created by Dev-C++ 4.9.9.2
+
+CPP  = g++.exe
+CC   = gcc.exe
+WINDRES = windres.exe
+RES  = obj/game_private.res
+OBJ  = obj/ai_main.o obj/ai_util.o obj/ai_wpnav.o obj/AnimalNPC.o obj/bg_g2_utils.o obj/bg_lib.o obj/bg_misc.o obj/bg_panimate.o obj/bg_pmove.o obj/bg_saber.o obj/bg_saberLoad.o obj/bg_saga.o obj/bg_slidemove.o obj/bg_vehicleLoad.o obj/bg_weapons.o obj/FighterNPC.o obj/g_active.o obj/g_arenas.o obj/g_bot.o obj/g_client.o obj/g_cmds.o obj/g_combat.o obj/g_exphysics.o obj/g_ICARUScb.o obj/g_items.o obj/g_log.o obj/g_main.o obj/g_mem.o obj/g_misc.o obj/g_missile.o obj/g_mover.o obj/g_nav.o obj/g_navnew.o obj/g_object.o obj/g_saga.o obj/g_session.o obj/g_spawn.o obj/g_strap.o obj/g_svcmds.o obj/g_syscalls.o obj/g_target.o obj/g_team.o obj/g_timer.o obj/g_trigger.o obj/g_turret.o obj/g_turret_G2.o obj/g_utils.o obj/g_vehicles.o obj/g_vehicleTurret.o obj/g_weapon.o obj/NPC.o obj/NPC_AI_Atst.o obj/NPC_AI_Default.o obj/NPC_AI_Droid.o obj/NPC_AI_GalakMech.o obj/NPC_AI_Grenadier.o obj/NPC_AI_Howler.o obj/NPC_AI_ImperialProbe.o obj/NPC_AI_Interrogator.o obj/NPC_AI_Jedi.o obj/NPC_AI_Mark1.o obj/NPC_AI_Mark2.o obj/NPC_AI_MineMonster.o obj/NPC_AI_Rancor.o obj/NPC_AI_Remote.o obj/NPC_AI_Seeker.o obj/NPC_AI_Sentry.o obj/NPC_AI_Sniper.o obj/NPC_AI_Stormtrooper.o obj/NPC_AI_Utils.o obj/NPC_AI_Wampa.o obj/NPC_behavior.o obj/NPC_combat.o obj/NPC_goal.o obj/NPC_misc.o obj/NPC_move.o obj/NPC_reactions.o obj/NPC_senses.o obj/NPC_sounds.o obj/NPC_spawn.o obj/NPC_stats.o obj/NPC_utils.o obj/q_math.o obj/q_shared.o obj/SpeederNPC.o obj/tri_coll_test.o obj/w_force.o obj/w_saber.o obj/WalkerNPC.o $(RES)
+LINKOBJ  = obj/ai_main.o obj/ai_util.o obj/ai_wpnav.o obj/AnimalNPC.o obj/bg_g2_utils.o obj/bg_lib.o obj/bg_misc.o obj/bg_panimate.o obj/bg_pmove.o obj/bg_saber.o obj/bg_saberLoad.o obj/bg_saga.o obj/bg_slidemove.o obj/bg_vehicleLoad.o obj/bg_weapons.o obj/FighterNPC.o obj/g_active.o obj/g_arenas.o obj/g_bot.o obj/g_client.o obj/g_cmds.o obj/g_combat.o obj/g_exphysics.o obj/g_ICARUScb.o obj/g_items.o obj/g_log.o obj/g_main.o obj/g_mem.o obj/g_misc.o obj/g_missile.o obj/g_mover.o obj/g_nav.o obj/g_navnew.o obj/g_object.o obj/g_saga.o obj/g_session.o obj/g_spawn.o obj/g_strap.o obj/g_svcmds.o obj/g_syscalls.o obj/g_target.o obj/g_team.o obj/g_timer.o obj/g_trigger.o obj/g_turret.o obj/g_turret_G2.o obj/g_utils.o obj/g_vehicles.o obj/g_vehicleTurret.o obj/g_weapon.o obj/NPC.o obj/NPC_AI_Atst.o obj/NPC_AI_Default.o obj/NPC_AI_Droid.o obj/NPC_AI_GalakMech.o obj/NPC_AI_Grenadier.o obj/NPC_AI_Howler.o obj/NPC_AI_ImperialProbe.o obj/NPC_AI_Interrogator.o obj/NPC_AI_Jedi.o obj/NPC_AI_Mark1.o obj/NPC_AI_Mark2.o obj/NPC_AI_MineMonster.o obj/NPC_AI_Rancor.o obj/NPC_AI_Remote.o obj/NPC_AI_Seeker.o obj/NPC_AI_Sentry.o obj/NPC_AI_Sniper.o obj/NPC_AI_Stormtrooper.o obj/NPC_AI_Utils.o obj/NPC_AI_Wampa.o obj/NPC_behavior.o obj/NPC_combat.o obj/NPC_goal.o obj/NPC_misc.o obj/NPC_move.o obj/NPC_reactions.o obj/NPC_senses.o obj/NPC_sounds.o obj/NPC_spawn.o obj/NPC_stats.o obj/NPC_utils.o obj/q_math.o obj/q_shared.o obj/SpeederNPC.o obj/tri_coll_test.o obj/w_force.o obj/w_saber.o obj/WalkerNPC.o $(RES)
+LIBS =  -L"D:/Dev-Cpp/lib"  -s -march=i686 -mmmx 
+INCS =  -I"D:/Dev-Cpp/include" 
+CXXINCS =  -I"D:/Dev-Cpp/lib/gcc/mingw32/3.4.2/include"  -I"D:/Dev-Cpp/include/c++/3.4.2/backward"  -I"D:/Dev-Cpp/include/c++/3.4.2/mingw32"  -I"D:/Dev-Cpp/include/c++/3.4.2"  -I"D:/Dev-Cpp/include" 
+BIN  = jampgamex86.dll
+CXXFLAGS = $(CXXINCS)   -lcomctl32 -lgdi32 -fexpensive-optimizations -O3 -march=i686 -mmmx
+CFLAGS = $(INCS) -I../cgame -I../ui -I../qcommon -I../server -I../icarus -I../ghoul2 -DMISSIONPACK -DQAGAME -DQ3_VM -D_JK2MP -DGNUC -D__linux__ -march=i586 -O3 -DMINGW   -lcomctl32 -lgdi32 -fexpensive-optimizations -O3 -march=i686 -mmmx
+RM = rm -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before jampgamex86.dll all-after
+
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+DLLWRAP=dllwrap.exe
+DEFFILE=libjampgamex86.def
+STATICLIB=libjampgamex86.a
+
+$(BIN): $(LINKOBJ)
+	$(DLLWRAP) --output-def $(DEFFILE) --implib $(STATICLIB) $(LINKOBJ) $(LIBS) -o $(BIN)
+
+obj/ai_main.o: ai_main.c
+	$(CC) -c ai_main.c -o obj/ai_main.o $(CFLAGS)
+
+obj/ai_util.o: ai_util.c
+	$(CC) -c ai_util.c -o obj/ai_util.o $(CFLAGS)
+
+obj/ai_wpnav.o: ai_wpnav.c
+	$(CC) -c ai_wpnav.c -o obj/ai_wpnav.o $(CFLAGS)
+
+obj/AnimalNPC.o: AnimalNPC.c
+	$(CC) -c AnimalNPC.c -o obj/AnimalNPC.o $(CFLAGS)
+
+obj/bg_g2_utils.o: bg_g2_utils.c
+	$(CC) -c bg_g2_utils.c -o obj/bg_g2_utils.o $(CFLAGS)
+
+obj/bg_lib.o: bg_lib.c
+	$(CC) -c bg_lib.c -o obj/bg_lib.o $(CFLAGS)
+
+obj/bg_misc.o: bg_misc.c
+	$(CC) -c bg_misc.c -o obj/bg_misc.o $(CFLAGS)
+
+obj/bg_panimate.o: bg_panimate.c
+	$(CC) -c bg_panimate.c -o obj/bg_panimate.o $(CFLAGS)
+
+obj/bg_pmove.o: bg_pmove.c
+	$(CC) -c bg_pmove.c -o obj/bg_pmove.o $(CFLAGS)
+
+obj/bg_saber.o: bg_saber.c
+	$(CC) -c bg_saber.c -o obj/bg_saber.o $(CFLAGS)
+
+obj/bg_saberLoad.o: bg_saberLoad.c
+	$(CC) -c bg_saberLoad.c -o obj/bg_saberLoad.o $(CFLAGS)
+
+obj/bg_saga.o: bg_saga.c
+	$(CC) -c bg_saga.c -o obj/bg_saga.o $(CFLAGS)
+
+obj/bg_slidemove.o: bg_slidemove.c
+	$(CC) -c bg_slidemove.c -o obj/bg_slidemove.o $(CFLAGS)
+
+obj/bg_vehicleLoad.o: bg_vehicleLoad.c
+	$(CC) -c bg_vehicleLoad.c -o obj/bg_vehicleLoad.o $(CFLAGS)
+
+obj/bg_weapons.o: bg_weapons.c
+	$(CC) -c bg_weapons.c -o obj/bg_weapons.o $(CFLAGS)
+
+obj/FighterNPC.o: FighterNPC.c
+	$(CC) -c FighterNPC.c -o obj/FighterNPC.o $(CFLAGS)
+
+obj/g_active.o: g_active.c
+	$(CC) -c g_active.c -o obj/g_active.o $(CFLAGS)
+
+obj/g_arenas.o: g_arenas.c
+	$(CC) -c g_arenas.c -o obj/g_arenas.o $(CFLAGS)
+
+obj/g_bot.o: g_bot.c
+	$(CC) -c g_bot.c -o obj/g_bot.o $(CFLAGS)
+
+obj/g_client.o: g_client.c
+	$(CC) -c g_client.c -o obj/g_client.o $(CFLAGS)
+
+obj/g_cmds.o: g_cmds.c
+	$(CC) -c g_cmds.c -o obj/g_cmds.o $(CFLAGS)
+
+obj/g_combat.o: g_combat.c
+	$(CC) -c g_combat.c -o obj/g_combat.o $(CFLAGS)
+
+obj/g_exphysics.o: g_exphysics.c
+	$(CC) -c g_exphysics.c -o obj/g_exphysics.o $(CFLAGS)
+
+obj/g_ICARUScb.o: g_ICARUScb.c
+	$(CC) -c g_ICARUScb.c -o obj/g_ICARUScb.o $(CFLAGS)
+
+obj/g_items.o: g_items.c
+	$(CC) -c g_items.c -o obj/g_items.o $(CFLAGS)
+
+obj/g_log.o: g_log.c
+	$(CC) -c g_log.c -o obj/g_log.o $(CFLAGS)
+
+obj/g_main.o: g_main.c
+	$(CC) -c g_main.c -o obj/g_main.o $(CFLAGS)
+
+obj/g_mem.o: g_mem.c
+	$(CC) -c g_mem.c -o obj/g_mem.o $(CFLAGS)
+
+obj/g_misc.o: g_misc.c
+	$(CC) -c g_misc.c -o obj/g_misc.o $(CFLAGS)
+
+obj/g_missile.o: g_missile.c
+	$(CC) -c g_missile.c -o obj/g_missile.o $(CFLAGS)
+
+obj/g_mover.o: g_mover.c
+	$(CC) -c g_mover.c -o obj/g_mover.o $(CFLAGS)
+
+obj/g_nav.o: g_nav.c
+	$(CC) -c g_nav.c -o obj/g_nav.o $(CFLAGS)
+
+obj/g_navnew.o: g_navnew.c
+	$(CC) -c g_navnew.c -o obj/g_navnew.o $(CFLAGS)
+
+obj/g_object.o: g_object.c
+	$(CC) -c g_object.c -o obj/g_object.o $(CFLAGS)
+
+obj/g_saga.o: g_saga.c
+	$(CC) -c g_saga.c -o obj/g_saga.o $(CFLAGS)
+
+obj/g_session.o: g_session.c
+	$(CC) -c g_session.c -o obj/g_session.o $(CFLAGS)
+
+obj/g_spawn.o: g_spawn.c
+	$(CC) -c g_spawn.c -o obj/g_spawn.o $(CFLAGS)
+
+obj/g_strap.o: g_strap.c
+	$(CC) -c g_strap.c -o obj/g_strap.o $(CFLAGS)
+
+obj/g_svcmds.o: g_svcmds.c
+	$(CC) -c g_svcmds.c -o obj/g_svcmds.o $(CFLAGS)
+
+obj/g_syscalls.o: g_syscalls.c
+	$(CC) -c g_syscalls.c -o obj/g_syscalls.o $(CFLAGS)
+
+obj/g_target.o: g_target.c
+	$(CC) -c g_target.c -o obj/g_target.o $(CFLAGS)
+
+obj/g_team.o: g_team.c
+	$(CC) -c g_team.c -o obj/g_team.o $(CFLAGS)
+
+obj/g_timer.o: g_timer.c
+	$(CC) -c g_timer.c -o obj/g_timer.o $(CFLAGS)
+
+obj/g_trigger.o: g_trigger.c
+	$(CC) -c g_trigger.c -o obj/g_trigger.o $(CFLAGS)
+
+obj/g_turret.o: g_turret.c
+	$(CC) -c g_turret.c -o obj/g_turret.o $(CFLAGS)
+
+obj/g_turret_G2.o: g_turret_G2.c
+	$(CC) -c g_turret_G2.c -o obj/g_turret_G2.o $(CFLAGS)
+
+obj/g_utils.o: g_utils.c
+	$(CC) -c g_utils.c -o obj/g_utils.o $(CFLAGS)
+
+obj/g_vehicles.o: g_vehicles.c
+	$(CC) -c g_vehicles.c -o obj/g_vehicles.o $(CFLAGS)
+
+obj/g_vehicleTurret.o: g_vehicleTurret.c
+	$(CC) -c g_vehicleTurret.c -o obj/g_vehicleTurret.o $(CFLAGS)
+
+obj/g_weapon.o: g_weapon.c
+	$(CC) -c g_weapon.c -o obj/g_weapon.o $(CFLAGS)
+
+obj/NPC.o: NPC.c
+	$(CC) -c NPC.c -o obj/NPC.o $(CFLAGS)
+
+obj/NPC_AI_Atst.o: NPC_AI_Atst.c
+	$(CC) -c NPC_AI_Atst.c -o obj/NPC_AI_Atst.o $(CFLAGS)
+
+obj/NPC_AI_Default.o: NPC_AI_Default.c
+	$(CC) -c NPC_AI_Default.c -o obj/NPC_AI_Default.o $(CFLAGS)
+
+obj/NPC_AI_Droid.o: NPC_AI_Droid.c
+	$(CC) -c NPC_AI_Droid.c -o obj/NPC_AI_Droid.o $(CFLAGS)
+
+obj/NPC_AI_GalakMech.o: NPC_AI_GalakMech.c
+	$(CC) -c NPC_AI_GalakMech.c -o obj/NPC_AI_GalakMech.o $(CFLAGS)
+
+obj/NPC_AI_Grenadier.o: NPC_AI_Grenadier.c
+	$(CC) -c NPC_AI_Grenadier.c -o obj/NPC_AI_Grenadier.o $(CFLAGS)
+
+obj/NPC_AI_Howler.o: NPC_AI_Howler.c
+	$(CC) -c NPC_AI_Howler.c -o obj/NPC_AI_Howler.o $(CFLAGS)
+
+obj/NPC_AI_ImperialProbe.o: NPC_AI_ImperialProbe.c
+	$(CC) -c NPC_AI_ImperialProbe.c -o obj/NPC_AI_ImperialProbe.o $(CFLAGS)
+
+obj/NPC_AI_Interrogator.o: NPC_AI_Interrogator.c
+	$(CC) -c NPC_AI_Interrogator.c -o obj/NPC_AI_Interrogator.o $(CFLAGS)
+
+obj/NPC_AI_Jedi.o: NPC_AI_Jedi.c
+	$(CC) -c NPC_AI_Jedi.c -o obj/NPC_AI_Jedi.o $(CFLAGS)
+
+obj/NPC_AI_Mark1.o: NPC_AI_Mark1.c
+	$(CC) -c NPC_AI_Mark1.c -o obj/NPC_AI_Mark1.o $(CFLAGS)
+
+obj/NPC_AI_Mark2.o: NPC_AI_Mark2.c
+	$(CC) -c NPC_AI_Mark2.c -o obj/NPC_AI_Mark2.o $(CFLAGS)
+
+obj/NPC_AI_MineMonster.o: NPC_AI_MineMonster.c
+	$(CC) -c NPC_AI_MineMonster.c -o obj/NPC_AI_MineMonster.o $(CFLAGS)
+
+obj/NPC_AI_Rancor.o: NPC_AI_Rancor.c
+	$(CC) -c NPC_AI_Rancor.c -o obj/NPC_AI_Rancor.o $(CFLAGS)
+
+obj/NPC_AI_Remote.o: NPC_AI_Remote.c
+	$(CC) -c NPC_AI_Remote.c -o obj/NPC_AI_Remote.o $(CFLAGS)
+
+obj/NPC_AI_Seeker.o: NPC_AI_Seeker.c
+	$(CC) -c NPC_AI_Seeker.c -o obj/NPC_AI_Seeker.o $(CFLAGS)
+
+obj/NPC_AI_Sentry.o: NPC_AI_Sentry.c
+	$(CC) -c NPC_AI_Sentry.c -o obj/NPC_AI_Sentry.o $(CFLAGS)
+
+obj/NPC_AI_Sniper.o: NPC_AI_Sniper.c
+	$(CC) -c NPC_AI_Sniper.c -o obj/NPC_AI_Sniper.o $(CFLAGS)
+
+obj/NPC_AI_Stormtrooper.o: NPC_AI_Stormtrooper.c
+	$(CC) -c NPC_AI_Stormtrooper.c -o obj/NPC_AI_Stormtrooper.o $(CFLAGS)
+
+obj/NPC_AI_Utils.o: NPC_AI_Utils.c
+	$(CC) -c NPC_AI_Utils.c -o obj/NPC_AI_Utils.o $(CFLAGS)
+
+obj/NPC_AI_Wampa.o: NPC_AI_Wampa.c
+	$(CC) -c NPC_AI_Wampa.c -o obj/NPC_AI_Wampa.o $(CFLAGS)
+
+obj/NPC_behavior.o: NPC_behavior.c
+	$(CC) -c NPC_behavior.c -o obj/NPC_behavior.o $(CFLAGS)
+
+obj/NPC_combat.o: NPC_combat.c
+	$(CC) -c NPC_combat.c -o obj/NPC_combat.o $(CFLAGS)
+
+obj/NPC_goal.o: NPC_goal.c
+	$(CC) -c NPC_goal.c -o obj/NPC_goal.o $(CFLAGS)
+
+obj/NPC_misc.o: NPC_misc.c
+	$(CC) -c NPC_misc.c -o obj/NPC_misc.o $(CFLAGS)
+
+obj/NPC_move.o: NPC_move.c
+	$(CC) -c NPC_move.c -o obj/NPC_move.o $(CFLAGS)
+
+obj/NPC_reactions.o: NPC_reactions.c
+	$(CC) -c NPC_reactions.c -o obj/NPC_reactions.o $(CFLAGS)
+
+obj/NPC_senses.o: NPC_senses.c
+	$(CC) -c NPC_senses.c -o obj/NPC_senses.o $(CFLAGS)
+
+obj/NPC_sounds.o: NPC_sounds.c
+	$(CC) -c NPC_sounds.c -o obj/NPC_sounds.o $(CFLAGS)
+
+obj/NPC_spawn.o: NPC_spawn.c
+	$(CC) -c NPC_spawn.c -o obj/NPC_spawn.o $(CFLAGS)
+
+obj/NPC_stats.o: NPC_stats.c
+	$(CC) -c NPC_stats.c -o obj/NPC_stats.o $(CFLAGS)
+
+obj/NPC_utils.o: NPC_utils.c
+	$(CC) -c NPC_utils.c -o obj/NPC_utils.o $(CFLAGS)
+
+obj/q_math.o: q_math.c
+	$(CC) -c q_math.c -o obj/q_math.o $(CFLAGS)
+
+obj/q_shared.o: q_shared.c
+	$(CC) -c q_shared.c -o obj/q_shared.o $(CFLAGS)
+
+obj/SpeederNPC.o: SpeederNPC.c
+	$(CC) -c SpeederNPC.c -o obj/SpeederNPC.o $(CFLAGS)
+
+obj/tri_coll_test.o: tri_coll_test.c
+	$(CC) -c tri_coll_test.c -o obj/tri_coll_test.o $(CFLAGS)
+
+obj/w_force.o: w_force.c
+	$(CC) -c w_force.c -o obj/w_force.o $(CFLAGS)
+
+obj/w_saber.o: w_saber.c
+	$(CC) -c w_saber.c -o obj/w_saber.o $(CFLAGS)
+
+obj/WalkerNPC.o: WalkerNPC.c
+	$(CC) -c WalkerNPC.c -o obj/WalkerNPC.o $(CFLAGS)
+
+obj/game_private.res: game_private.rc ../win32/JK2game.rc 
+	$(WINDRES) -i game_private.rc --input-format=rc -o obj/game_private.res -O coff 

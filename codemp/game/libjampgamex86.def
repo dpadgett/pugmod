@@ -1,0 +1,4 @@
+; dlltool --base-file C:\DOCUME~1\dan\LOCALS~1\Temp/cca03056.base --output-exp jampgamex86.exp --dllname jampgamex86.dll --output-def libjampgamex86.def --exclude-symbol=DllMainCRTStartup@12 --def C:\DOCUME~1\dan\LOCALS~1\Temp/cca03056.def --output-lib libjampgamex86.a
+EXPORTS
+	vmMain @ 1
+	dllEntry @ 2

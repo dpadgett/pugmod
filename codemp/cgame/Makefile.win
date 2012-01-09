@@ -1,0 +1,193 @@
+# Project: cgame
+# Makefile created by Dev-C++ 4.9.9.2
+
+CPP  = g++.exe
+CC   = gcc.exe
+WINDRES = windres.exe
+RES  = obj/JK2_cgame_private.res
+OBJ  = obj/AnimalNPC.o obj/FighterNPC.o obj/SpeederNPC.o obj/WalkerNPC.o obj/bg_g2_utils.o obj/bg_lib.o obj/bg_misc.o obj/bg_panimate.o obj/bg_pmove.o obj/bg_saber.o obj/bg_saberLoad.o obj/bg_saga.o obj/bg_slidemove.o obj/bg_vehicleLoad.o obj/bg_weapons.o obj/cg_consolecmds.o obj/cg_draw.o obj/cg_drawtools.o obj/cg_effects.o obj/cg_ents.o obj/cg_event.o obj/cg_info.o obj/cg_light.o obj/cg_localents.o obj/cg_main.o obj/cg_marks.o obj/cg_newDraw.o obj/cg_players.o obj/cg_playerstate.o obj/cg_predict.o obj/cg_saga.o obj/cg_scoreboard.o obj/cg_servercmds.o obj/cg_snapshot.o obj/cg_strap.o obj/cg_syscalls.o obj/cg_turret.o obj/cg_view.o obj/cg_weaponinit.o obj/cg_weapons.o obj/fx_blaster.o obj/fx_bowcaster.o obj/fx_bryarpistol.o obj/fx_demp2.o obj/fx_disruptor.o obj/fx_flechette.o obj/fx_force.o obj/fx_heavyrepeater.o obj/fx_rocketlauncher.o obj/q_math.o obj/q_shared.o obj/ui_shared.o obj/cg_hdc.o $(RES)
+LINKOBJ  = obj/AnimalNPC.o obj/FighterNPC.o obj/SpeederNPC.o obj/WalkerNPC.o obj/bg_g2_utils.o obj/bg_lib.o obj/bg_misc.o obj/bg_panimate.o obj/bg_pmove.o obj/bg_saber.o obj/bg_saberLoad.o obj/bg_saga.o obj/bg_slidemove.o obj/bg_vehicleLoad.o obj/bg_weapons.o obj/cg_consolecmds.o obj/cg_draw.o obj/cg_drawtools.o obj/cg_effects.o obj/cg_ents.o obj/cg_event.o obj/cg_info.o obj/cg_light.o obj/cg_localents.o obj/cg_main.o obj/cg_marks.o obj/cg_newDraw.o obj/cg_players.o obj/cg_playerstate.o obj/cg_predict.o obj/cg_saga.o obj/cg_scoreboard.o obj/cg_servercmds.o obj/cg_snapshot.o obj/cg_strap.o obj/cg_syscalls.o obj/cg_turret.o obj/cg_view.o obj/cg_weaponinit.o obj/cg_weapons.o obj/fx_blaster.o obj/fx_bowcaster.o obj/fx_bryarpistol.o obj/fx_demp2.o obj/fx_disruptor.o obj/fx_flechette.o obj/fx_force.o obj/fx_heavyrepeater.o obj/fx_rocketlauncher.o obj/q_math.o obj/q_shared.o obj/ui_shared.o obj/cg_hdc.o $(RES)
+LIBS =  -L"D:/Dev-Cpp/lib" -lopengl32 -lglu32  -s -march=i686 -msse 
+INCS =  -I"D:/Dev-Cpp/include"  -I".."  -I"./../game" 
+CXXINCS =  -I"D:/Dev-Cpp/lib/gcc/mingw32/3.4.2/include"  -I"D:/Dev-Cpp/include/c++/3.4.2/backward"  -I"D:/Dev-Cpp/include/c++/3.4.2/mingw32"  -I"D:/Dev-Cpp/include/c++/3.4.2"  -I"D:/Dev-Cpp/include"  -I".."  -I"./../game" 
+BIN  = cgamex86.dll
+CXXFLAGS = $(CXXINCS) -D__GNUWIN32__ -Wall -finline-functions -mcpu=pentiumpro -D_M_IX86=600 -DNDEBUG -DWIN32 -D_WINDOWS -DMISSIONPACK -D_JK2 -DCGAME -fexceptions   -lcomctl32 -lgdi32 -fexpensive-optimizations -O3 -march=i686 -msse
+CFLAGS = $(INCS) -DGNUC -Wall -finline-functions -mcpu=pentiumpro -D_M_IX86=600 -DNDEBUG -DMISSIONPACK -D_JK2 -DCGAME -fexceptions -D__linux__ -Dmaxfix   -lcomctl32 -lgdi32 -fexpensive-optimizations -O3 -march=i686 -msse
+RM = rm -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before cgamex86.dll all-after
+
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+DLLWRAP=dllwrap.exe
+DEFFILE=libcgamex86.def
+STATICLIB=libcgamex86.a
+
+$(BIN): $(LINKOBJ)
+	$(DLLWRAP) --output-def $(DEFFILE) --driver-name c++ --implib $(STATICLIB) $(LINKOBJ) $(LIBS) -o $(BIN)
+
+obj/AnimalNPC.o: ../game/AnimalNPC.c
+	$(CC) -c ../game/AnimalNPC.c -o obj/AnimalNPC.o $(CFLAGS)
+
+obj/FighterNPC.o: ../game/FighterNPC.c
+	$(CC) -c ../game/FighterNPC.c -o obj/FighterNPC.o $(CFLAGS)
+
+obj/SpeederNPC.o: ../game/SpeederNPC.c
+	$(CC) -c ../game/SpeederNPC.c -o obj/SpeederNPC.o $(CFLAGS)
+
+obj/WalkerNPC.o: ../game/WalkerNPC.c
+	$(CC) -c ../game/WalkerNPC.c -o obj/WalkerNPC.o $(CFLAGS)
+
+obj/bg_g2_utils.o: ../game/bg_g2_utils.c
+	$(CC) -c ../game/bg_g2_utils.c -o obj/bg_g2_utils.o $(CFLAGS)
+
+obj/bg_lib.o: ../game/bg_lib.c
+	$(CC) -c ../game/bg_lib.c -o obj/bg_lib.o $(CFLAGS)
+
+obj/bg_misc.o: ../game/bg_misc.c
+	$(CC) -c ../game/bg_misc.c -o obj/bg_misc.o $(CFLAGS)
+
+obj/bg_panimate.o: ../game/bg_panimate.c
+	$(CC) -c ../game/bg_panimate.c -o obj/bg_panimate.o $(CFLAGS)
+
+obj/bg_pmove.o: ../game/bg_pmove.c
+	$(CC) -c ../game/bg_pmove.c -o obj/bg_pmove.o $(CFLAGS)
+
+obj/bg_saber.o: ../game/bg_saber.c
+	$(CC) -c ../game/bg_saber.c -o obj/bg_saber.o $(CFLAGS)
+
+obj/bg_saberLoad.o: ../game/bg_saberLoad.c
+	$(CC) -c ../game/bg_saberLoad.c -o obj/bg_saberLoad.o $(CFLAGS)
+
+obj/bg_saga.o: ../game/bg_saga.c
+	$(CC) -c ../game/bg_saga.c -o obj/bg_saga.o $(CFLAGS)
+
+obj/bg_slidemove.o: ../game/bg_slidemove.c
+	$(CC) -c ../game/bg_slidemove.c -o obj/bg_slidemove.o $(CFLAGS)
+
+obj/bg_vehicleLoad.o: ../game/bg_vehicleLoad.c
+	$(CC) -c ../game/bg_vehicleLoad.c -o obj/bg_vehicleLoad.o $(CFLAGS)
+
+obj/bg_weapons.o: ../game/bg_weapons.c
+	$(CC) -c ../game/bg_weapons.c -o obj/bg_weapons.o $(CFLAGS)
+
+obj/cg_consolecmds.o: cg_consolecmds.c
+	$(CC) -c cg_consolecmds.c -o obj/cg_consolecmds.o $(CFLAGS)
+
+obj/cg_draw.o: cg_draw.c
+	$(CC) -c cg_draw.c -o obj/cg_draw.o $(CFLAGS)
+
+obj/cg_drawtools.o: cg_drawtools.c
+	$(CC) -c cg_drawtools.c -o obj/cg_drawtools.o $(CFLAGS)
+
+obj/cg_effects.o: cg_effects.c
+	$(CC) -c cg_effects.c -o obj/cg_effects.o $(CFLAGS)
+
+obj/cg_ents.o: cg_ents.c
+	$(CC) -c cg_ents.c -o obj/cg_ents.o $(CFLAGS)
+
+obj/cg_event.o: cg_event.c
+	$(CC) -c cg_event.c -o obj/cg_event.o $(CFLAGS)
+
+obj/cg_info.o: cg_info.c
+	$(CC) -c cg_info.c -o obj/cg_info.o $(CFLAGS)
+
+obj/cg_light.o: cg_light.c
+	$(CC) -c cg_light.c -o obj/cg_light.o $(CFLAGS)
+
+obj/cg_localents.o: cg_localents.c
+	$(CC) -c cg_localents.c -o obj/cg_localents.o $(CFLAGS)
+
+obj/cg_main.o: cg_main.c
+	$(CC) -c cg_main.c -o obj/cg_main.o $(CFLAGS)
+
+obj/cg_marks.o: cg_marks.c
+	$(CC) -c cg_marks.c -o obj/cg_marks.o $(CFLAGS)
+
+obj/cg_newDraw.o: cg_newDraw.c
+	$(CC) -c cg_newDraw.c -o obj/cg_newDraw.o $(CFLAGS)
+
+obj/cg_players.o: cg_players.c
+	$(CC) -c cg_players.c -o obj/cg_players.o $(CFLAGS)
+
+obj/cg_playerstate.o: cg_playerstate.c
+	$(CC) -c cg_playerstate.c -o obj/cg_playerstate.o $(CFLAGS)
+
+obj/cg_predict.o: cg_predict.c
+	$(CC) -c cg_predict.c -o obj/cg_predict.o $(CFLAGS)
+
+obj/cg_saga.o: cg_saga.c
+	$(CC) -c cg_saga.c -o obj/cg_saga.o $(CFLAGS)
+
+obj/cg_scoreboard.o: cg_scoreboard.c
+	$(CC) -c cg_scoreboard.c -o obj/cg_scoreboard.o $(CFLAGS)
+
+obj/cg_servercmds.o: cg_servercmds.c
+	$(CC) -c cg_servercmds.c -o obj/cg_servercmds.o $(CFLAGS)
+
+obj/cg_snapshot.o: cg_snapshot.c
+	$(CC) -c cg_snapshot.c -o obj/cg_snapshot.o $(CFLAGS)
+
+obj/cg_strap.o: cg_strap.c
+	$(CC) -c cg_strap.c -o obj/cg_strap.o $(CFLAGS)
+
+obj/cg_syscalls.o: cg_syscalls.c
+	$(CC) -c cg_syscalls.c -o obj/cg_syscalls.o $(CFLAGS)
+
+obj/cg_turret.o: cg_turret.c
+	$(CC) -c cg_turret.c -o obj/cg_turret.o $(CFLAGS)
+
+obj/cg_view.o: cg_view.c
+	$(CC) -c cg_view.c -o obj/cg_view.o $(CFLAGS)
+
+obj/cg_weaponinit.o: cg_weaponinit.c
+	$(CC) -c cg_weaponinit.c -o obj/cg_weaponinit.o $(CFLAGS)
+
+obj/cg_weapons.o: cg_weapons.c
+	$(CC) -c cg_weapons.c -o obj/cg_weapons.o $(CFLAGS)
+
+obj/fx_blaster.o: fx_blaster.c
+	$(CC) -c fx_blaster.c -o obj/fx_blaster.o $(CFLAGS)
+
+obj/fx_bowcaster.o: fx_bowcaster.c
+	$(CC) -c fx_bowcaster.c -o obj/fx_bowcaster.o $(CFLAGS)
+
+obj/fx_bryarpistol.o: fx_bryarpistol.c
+	$(CC) -c fx_bryarpistol.c -o obj/fx_bryarpistol.o $(CFLAGS)
+
+obj/fx_demp2.o: fx_demp2.c
+	$(CC) -c fx_demp2.c -o obj/fx_demp2.o $(CFLAGS)
+
+obj/fx_disruptor.o: fx_disruptor.c
+	$(CC) -c fx_disruptor.c -o obj/fx_disruptor.o $(CFLAGS)
+
+obj/fx_flechette.o: fx_flechette.c
+	$(CC) -c fx_flechette.c -o obj/fx_flechette.o $(CFLAGS)
+
+obj/fx_force.o: fx_force.c
+	$(CC) -c fx_force.c -o obj/fx_force.o $(CFLAGS)
+
+obj/fx_heavyrepeater.o: fx_heavyrepeater.c
+	$(CC) -c fx_heavyrepeater.c -o obj/fx_heavyrepeater.o $(CFLAGS)
+
+obj/fx_rocketlauncher.o: fx_rocketlauncher.c
+	$(CC) -c fx_rocketlauncher.c -o obj/fx_rocketlauncher.o $(CFLAGS)
+
+obj/q_math.o: ../game/q_math.c
+	$(CC) -c ../game/q_math.c -o obj/q_math.o $(CFLAGS)
+
+obj/q_shared.o: ../game/q_shared.c
+	$(CC) -c ../game/q_shared.c -o obj/q_shared.o $(CFLAGS)
+
+obj/ui_shared.o: ../ui/ui_shared.c
+	$(CC) -c ../ui/ui_shared.c -o obj/ui_shared.o $(CFLAGS)
+
+obj/cg_hdc.o: cg_hdc.c
+	$(CC) -c cg_hdc.c -o obj/cg_hdc.o $(CFLAGS)
+
+obj/JK2_cgame_private.res: JK2_cgame_private.rc ../win32/JK2cgame.rc 
+	$(WINDRES) -i JK2_cgame_private.rc --input-format=rc -o obj/JK2_cgame_private.res -O coff 
