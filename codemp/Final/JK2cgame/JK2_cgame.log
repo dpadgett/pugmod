@@ -1,57 +1,53 @@
-﻿Build started 12/14/2011 9:01:59 PM.
+﻿Build started 7/6/2012 3:53:00 AM.
      1>Project "C:\Users\dan\Documents\Visual Studio 2010\Projects\pugmod\codemp\cgame\JK2_cgame.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating ".\../Final/JK2cgame\JK2cgame.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I.. /I./../game /Zi /nologo /W4 /WX- /O2 /Ob2 /Oi /Ot /Oy- /D USE_PNG /D NDEBUG /D _WINDOWS /D MISSIONPACK /D WIN32 /D CGAME /D _JK2 /D FINAL_BUILD /D _VC80_UPGRADE=0x0700 /D _WINDLL /GF /Gm- /EHsc /MT /GS- /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo".\../Final/JK2cgame/" /Fd".\../Final/JK2cgame/vc100.pdb" /Gd /TC /analyze- /errorReport:prompt cg_draw.c
-         cg_draw.c
-     1>cg_draw.c(1757): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-     1>cg_draw.c(1927): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\stdio.h(371) : see declaration of 'sprintf'
-     1>cg_draw.c(1992): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\stdio.h(371) : see declaration of 'sprintf'
-     1>cg_draw.c(2063): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\stdio.h(371) : see declaration of 'sprintf'
-     1>cg_draw.c(2135): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\stdio.h(371) : see declaration of 'sprintf'
-     1>cg_draw.c(2305): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\stdio.h(371) : see declaration of 'sprintf'
-     1>cg_draw.c(2398): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\stdio.h(371) : see declaration of 'sprintf'
-     1>cg_draw.c(2857): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-     1>cg_draw.c(6732): warning C4996: 'stricmp': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _stricmp. See online help for details.
-                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\string.h(246) : see declaration of 'stricmp'
-     1>cg_draw.c(6736): warning C4996: 'stricmp': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _stricmp. See online help for details.
-                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\string.h(246) : see declaration of 'stricmp'
-     1>cg_draw.c(6740): warning C4996: 'stricmp': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _stricmp. See online help for details.
-                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\string.h(246) : see declaration of 'stricmp'
-     1>cg_draw.c(6744): warning C4996: 'stricmp': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _stricmp. See online help for details.
-                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\string.h(246) : see declaration of 'stricmp'
-     1>cg_draw.c(6748): warning C4996: 'stricmp': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _stricmp. See online help for details.
-                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\string.h(246) : see declaration of 'stricmp'
-     1>cg_draw.c(6752): warning C4996: 'stricmp': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _stricmp. See online help for details.
-                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\string.h(246) : see declaration of 'stricmp'
-     1>cg_draw.c(6756): warning C4996: 'stricmp': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _stricmp. See online help for details.
-                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\string.h(246) : see declaration of 'stricmp'
-     1>cg_draw.c(6760): warning C4996: 'stricmp': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _stricmp. See online help for details.
-                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\string.h(246) : see declaration of 'stricmp'
-     1>cg_draw.c(6781): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-     1>cg_draw.c(6782): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-     1>cg_draw.c(6693): warning C4101: 'j' : unreferenced local variable
-     1>cg_draw.c(7553): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-     1>cg_draw.c(7619): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-     1>cg_draw.c(7623): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-     1>cg_draw.c(7732): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-     1>cg_draw.c(8559): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-     1>cg_draw.c(8703): warning C4101: 'box' : unreferenced local variable
-     1>c:\users\dan\documents\visual studio 2010\projects\pugmod\codemp\cgame\cg_draw.c(6364): warning C4701: potentially uninitialized local variable 'oldNum' used
-     1>c:\users\dan\documents\visual studio 2010\projects\pugmod\codemp\cgame\cg_draw.c(6366): warning C4701: potentially uninitialized local variable 'oldTeam' used
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I.. /I./../game /Zi /nologo /W4 /WX- /O2 /Ob2 /Oi /Ot /Oy- /D USE_PNG /D NDEBUG /D _WINDOWS /D MISSIONPACK /D WIN32 /D CGAME /D _JK2 /D FINAL_BUILD /D _VC80_UPGRADE=0x0700 /D _WINDLL /GF /Gm- /EHsc /MT /GS- /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo".\../Final/JK2cgame/" /Fd".\../Final/JK2cgame/vc100.pdb" /Gd /TC /analyze- /errorReport:prompt cg_view.c
+         cg_view.c
+     1>cg_view.c(2874): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>cg_view.c(3295): warning C4189: 'velMax' : local variable is initialized but not referenced
+     1>cg_view.c(3295): warning C4189: 'accelMax' : local variable is initialized but not referenced
+     1>c:\users\dan\documents\visual studio 2010\projects\pugmod\codemp\cgame\fx_local.h(12): warning C4210: nonstandard extension used : function given file scope
+     1>c:\users\dan\documents\visual studio 2010\projects\pugmod\codemp\cgame\fx_local.h(13): warning C4210: nonstandard extension used : function given file scope
+     1>c:\users\dan\documents\visual studio 2010\projects\pugmod\codemp\cgame\fx_local.h(26): warning C4210: nonstandard extension used : function given file scope
+     1>c:\users\dan\documents\visual studio 2010\projects\pugmod\codemp\cgame\fx_local.h(27): warning C4210: nonstandard extension used : function given file scope
+     1>c:\users\dan\documents\visual studio 2010\projects\pugmod\codemp\cgame\fx_local.h(28): warning C4210: nonstandard extension used : function given file scope
+     1>c:\users\dan\documents\visual studio 2010\projects\pugmod\codemp\cgame\fx_local.h(29): warning C4210: nonstandard extension used : function given file scope
+     1>c:\users\dan\documents\visual studio 2010\projects\pugmod\codemp\cgame\fx_local.h(30): warning C4210: nonstandard extension used : function given file scope
+     1>c:\users\dan\documents\visual studio 2010\projects\pugmod\codemp\cgame\fx_local.h(31): warning C4210: nonstandard extension used : function given file scope
+     1>c:\users\dan\documents\visual studio 2010\projects\pugmod\codemp\cgame\fx_local.h(34): warning C4210: nonstandard extension used : function given file scope
+     1>c:\users\dan\documents\visual studio 2010\projects\pugmod\codemp\cgame\fx_local.h(35): warning C4210: nonstandard extension used : function given file scope
+     1>c:\users\dan\documents\visual studio 2010\projects\pugmod\codemp\cgame\fx_local.h(36): warning C4210: nonstandard extension used : function given file scope
+     1>c:\users\dan\documents\visual studio 2010\projects\pugmod\codemp\cgame\fx_local.h(37): warning C4210: nonstandard extension used : function given file scope
+     1>c:\users\dan\documents\visual studio 2010\projects\pugmod\codemp\cgame\fx_local.h(40): warning C4210: nonstandard extension used : function given file scope
+     1>c:\users\dan\documents\visual studio 2010\projects\pugmod\codemp\cgame\fx_local.h(41): warning C4210: nonstandard extension used : function given file scope
+     1>c:\users\dan\documents\visual studio 2010\projects\pugmod\codemp\cgame\fx_local.h(42): warning C4210: nonstandard extension used : function given file scope
+     1>c:\users\dan\documents\visual studio 2010\projects\pugmod\codemp\cgame\fx_local.h(43): warning C4210: nonstandard extension used : function given file scope
+     1>c:\users\dan\documents\visual studio 2010\projects\pugmod\codemp\cgame\fx_local.h(44): warning C4210: nonstandard extension used : function given file scope
+     1>c:\users\dan\documents\visual studio 2010\projects\pugmod\codemp\cgame\fx_local.h(45): warning C4210: nonstandard extension used : function given file scope
+     1>c:\users\dan\documents\visual studio 2010\projects\pugmod\codemp\cgame\fx_local.h(48): warning C4210: nonstandard extension used : function given file scope
+     1>c:\users\dan\documents\visual studio 2010\projects\pugmod\codemp\cgame\fx_local.h(49): warning C4210: nonstandard extension used : function given file scope
+     1>c:\users\dan\documents\visual studio 2010\projects\pugmod\codemp\cgame\fx_local.h(50): warning C4210: nonstandard extension used : function given file scope
+     1>c:\users\dan\documents\visual studio 2010\projects\pugmod\codemp\cgame\fx_local.h(51): warning C4210: nonstandard extension used : function given file scope
+     1>c:\users\dan\documents\visual studio 2010\projects\pugmod\codemp\cgame\fx_local.h(54): warning C4210: nonstandard extension used : function given file scope
+     1>c:\users\dan\documents\visual studio 2010\projects\pugmod\codemp\cgame\fx_local.h(55): warning C4210: nonstandard extension used : function given file scope
+     1>c:\users\dan\documents\visual studio 2010\projects\pugmod\codemp\cgame\fx_local.h(56): warning C4210: nonstandard extension used : function given file scope
+     1>c:\users\dan\documents\visual studio 2010\projects\pugmod\codemp\cgame\fx_local.h(57): warning C4210: nonstandard extension used : function given file scope
+     1>c:\users\dan\documents\visual studio 2010\projects\pugmod\codemp\cgame\fx_local.h(60): warning C4210: nonstandard extension used : function given file scope
+     1>c:\users\dan\documents\visual studio 2010\projects\pugmod\codemp\cgame\fx_local.h(61): warning C4210: nonstandard extension used : function given file scope
+     1>c:\users\dan\documents\visual studio 2010\projects\pugmod\codemp\cgame\fx_local.h(62): warning C4210: nonstandard extension used : function given file scope
+     1>c:\users\dan\documents\visual studio 2010\projects\pugmod\codemp\cgame\fx_local.h(63): warning C4210: nonstandard extension used : function given file scope
+     1>c:\users\dan\documents\visual studio 2010\projects\pugmod\codemp\cgame\cg_view.c(3412): warning C4701: potentially uninitialized local variable 'snap' used
+     1>c:\users\dan\documents\visual studio 2010\projects\pugmod\codemp\cgame\cg_view.c(3018): warning C4701: potentially uninitialized local variable 'prps' used
+     1>c:\users\dan\documents\visual studio 2010\projects\pugmod\codemp\cgame\cg_view.c(3030): warning C4701: potentially uninitialized local variable 'orgState' used
+     1>c:\users\dan\documents\visual studio 2010\projects\pugmod\codemp\cgame\cg_view.c(3261): warning C4701: potentially uninitialized local variable 'inwater' used
        ResourceCompile:
          All outputs are up-to-date.
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\Microsoft.CppBuild.targets(990,5): warning MSB8012: TargetPath(C:\Users\dan\Documents\Visual Studio 2010\Projects\pugmod\codemp\cgame\.\../Final\JK2cgame.dll) does not match the Linker's OutputFile property value (C:\Users\dan\Documents\Visual Studio 2010\Projects\pugmod\codemp\Final\cgamex86.dll). This may cause your project to build incorrectly. To correct this, please make sure that $(OutDir), $(TargetName) and $(TargetExt) property values match the value specified in %(Link.OutputFile).
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\Microsoft.CppBuild.targets(992,5): warning MSB8012: TargetName(JK2cgame) does not match the Linker's OutputFile property value (cgamex86). This may cause your project to build incorrectly. To correct this, please make sure that $(OutDir), $(TargetName) and $(TargetExt) property values match the value specified in %(Link.OutputFile).
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"../Final/cgamex86.dll" /INCREMENTAL:NO /NOLOGO odbc32.lib odbccp32.lib opengl32.lib .\libpng.lib .\zlib.lib .\detours.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /DEF:".\JK2_cgame.def" /MANIFEST /ManifestFile:".\../Final/JK2cgame\JK2cgame.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /MAP:".\../Final/cgamex86.map" /SUBSYSTEM:WINDOWS /OPT:REF /OPT:ICF /TLBID:1 /RELEASE /BASE:"0x30000000" /DYNAMICBASE:NO /IMPLIB:".\../Final/cgamex86.lib" /MACHINE:X86 /DLL .\../Final/JK2cgame\JK2cgame.res
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"../Final/cgamex86.dll" /INCREMENTAL:NO /NOLOGO odbc32.lib odbccp32.lib opengl32.lib .\libpng.lib .\zlib.lib .\detours.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /DEF:".\JK2_cgame.def" /MANIFEST /ManifestFile:".\../Final/JK2cgame\JK2cgame.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /MAP:".\../Final/cgamex86.map" /SUBSYSTEM:WINDOWS /OPT:REF /OPT:ICF /TLBID:1 /RELEASE /BASE:"0x30000000" /DYNAMICBASE:NO /IMPLIB:".\../Final/cgamex86.lib" /MACHINE:X86 /DLL .\../Final/JK2cgame\JK2cgame.res
          .\../Final/JK2cgame/AnimalNPC.obj
          .\../Final/JK2cgame/bg_g2_utils.obj
          .\../Final/JK2cgame/bg_misc.obj
@@ -117,4 +113,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:14.25
+Time Elapsed 00:00:01.89

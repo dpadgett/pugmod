@@ -2446,9 +2446,15 @@ typedef struct {
 	vec4_t		csi_coeff[6];   //cubic spline interpolation coefficients
 } demoCam_t;
 
+typedef struct {
+	double		coefficient[3];
+	vec4_t		csi_coeff;   //cubic spline interpolation coefficients for time
+} newCam_t;
+
 extern qboolean cgQueueLoad;
 extern int gotime;
 extern demoCam_t cam[50];
+extern newCam_t newcam[50];
 extern int curCam;
 extern void CG_ActualLoadDeferredPlayers( void );
 void drawSplines( void );
@@ -2460,6 +2466,16 @@ static void swapPlayerstates( ) {
 	tmp = cg.predictedPlayerState;
 	cg.predictedPlayerState = cg.truePredictedPlayerState;
 	cg.truePredictedPlayerState = tmp;
+}
+
+#include <math.h>
+float computePosition(int axis, double time) {
+	double position = 0;
+	int i;
+	for (i = 0; i < curCam; i++) {
+		position += pow(1 - time, (curCam - 1) - i) * pow(time, i) * newcam[i].coefficient[axis];
+	}
+	return position;
 }
 
 void CG_DrawActiveFrame( int serverTime, stereoFrame_t stereoView, qboolean demoPlayback ) {
@@ -2535,10 +2551,21 @@ void CG_DrawActiveFrame( int serverTime, stereoFrame_t stereoView, qboolean demo
 						/*curVec[0] = cam[i+1].origin[0] * timeDelta + cam[i].origin[0] * (1 - timeDelta);
 						curVec[1] = cam[i+1].origin[1] * timeDelta + cam[i].origin[1] * (1 - timeDelta);
 						curVec[2] = cam[i+1].origin[2] * timeDelta + cam[i].origin[2] * (1 - timeDelta);*/
-						curVec[0] = cam[i].csi_coeff[0][0]*l_time*l_time*l_time+cam[i].csi_coeff[0][1]*l_time*l_time+cam[i].csi_coeff[0][2]*l_time+cam[i].csi_coeff[0][3];
-						curVec[1] = cam[i].csi_coeff[1][0]*l_time*l_time*l_time+cam[i].csi_coeff[1][1]*l_time*l_time+cam[i].csi_coeff[1][2]*l_time+cam[i].csi_coeff[1][3];
-						curVec[2] = cam[i].csi_coeff[2][0]*l_time*l_time*l_time+cam[i].csi_coeff[2][1]*l_time*l_time+cam[i].csi_coeff[2][2]*l_time+cam[i].csi_coeff[2][3];
-						VectorAdd( curVec, cam[i].origin, curVec );
+
+//						curVec[0] = cam[i].csi_coeff[0][0]*l_time*l_time*l_time+cam[i].csi_coeff[0][1]*l_time*l_time+cam[i].csi_coeff[0][2]*l_time+cam[i].csi_coeff[0][3];
+//						curVec[1] = cam[i].csi_coeff[1][0]*l_time*l_time*l_time+cam[i].csi_coeff[1][1]*l_time*l_time+cam[i].csi_coeff[1][2]*l_time+cam[i].csi_coeff[1][3];
+//						curVec[2] = cam[i].csi_coeff[2][0]*l_time*l_time*l_time+cam[i].csi_coeff[2][1]*l_time*l_time+cam[i].csi_coeff[2][2]*l_time+cam[i].csi_coeff[2][3];
+
+						{
+							double time = ((myserverTime - cgs.levelStartTime) - cam[i].time) / (double) (cam[curCam - 1].time - cam[0].time);
+							time = newcam[i].csi_coeff[0]*time*time*time + newcam[i].csi_coeff[1]*time*time + newcam[i].csi_coeff[2]*time + newcam[i].csi_coeff[3];
+							time += i * (1 / (double) (curCam - 1));
+							curVec[0] = computePosition(0, time);
+							curVec[1] = computePosition(1, time);
+							curVec[2] = computePosition(2, time);
+							CG_Printf("Time: %lf, NumCams=%d, Position = {x=%lf,y=%lf,z=%lf}\n", time, curCam, curVec[0], curVec[1], curVec[2]);
+						}
+//						VectorAdd( curVec, cam[i].origin, curVec );
 						/*curVeca[0] = cam[i+1].angle[0] * timeDelta + cam[i].angle[0] * (1 - timeDelta);
 						curVeca[1] = cam[i+1].angle[1] * timeDelta + cam[i].angle[1] * (1 - timeDelta);
 						curVeca[2] = cam[i+1].angle[2] * timeDelta + cam[i].angle[2] * (1 - timeDelta);*/
@@ -3436,10 +3463,17 @@ void drawSplines( void )
 			verts[0].modulate[2] = verts[1].modulate[2] = 255;
 			verts[0].modulate[3] = verts[1].modulate[3] = 255;
 			
-			verts[2].xyz[0] = cam[i].csi_coeff[0][0]*l_time*l_time*l_time+cam[i].csi_coeff[0][1]*l_time*l_time+cam[i].csi_coeff[0][2]*l_time+cam[i].csi_coeff[0][3];
-			verts[2].xyz[1] = cam[i].csi_coeff[1][0]*l_time*l_time*l_time+cam[i].csi_coeff[1][1]*l_time*l_time+cam[i].csi_coeff[1][2]*l_time+cam[i].csi_coeff[1][3];
-			verts[2].xyz[2] = cam[i].csi_coeff[2][0]*l_time*l_time*l_time+cam[i].csi_coeff[2][1]*l_time*l_time+cam[i].csi_coeff[2][2]*l_time+cam[i].csi_coeff[2][3];
-			VectorAdd( verts[2].xyz, cam[i].origin, verts[2].xyz );
+//			verts[2].xyz[0] = cam[i].csi_coeff[0][0]*l_time*l_time*l_time+cam[i].csi_coeff[0][1]*l_time*l_time+cam[i].csi_coeff[0][2]*l_time+cam[i].csi_coeff[0][3];
+//			verts[2].xyz[1] = cam[i].csi_coeff[1][0]*l_time*l_time*l_time+cam[i].csi_coeff[1][1]*l_time*l_time+cam[i].csi_coeff[1][2]*l_time+cam[i].csi_coeff[1][3];
+//			verts[2].xyz[2] = cam[i].csi_coeff[2][0]*l_time*l_time*l_time+cam[i].csi_coeff[2][1]*l_time*l_time+cam[i].csi_coeff[2][2]*l_time+cam[i].csi_coeff[2][3];
+			{
+				double time = (myTime - cam[0].time) / (double) (cam[curCam - 1].time - cam[0].time);
+				verts[2].xyz[0] = computePosition(0, time);
+				verts[2].xyz[1] = computePosition(1, time);
+				verts[2].xyz[2] = computePosition(2, time);
+				// CG_Printf("Time: %lf, NumCams=%d, Position = {x=%lf,y=%lf,z=%lf}\n", time, curCam, verts[2].xyz[0], verts[2].xyz[1], verts[2].xyz[2]);
+			}
+			// VectorAdd( verts[2].xyz, cam[i].origin, verts[2].xyz );
 			VectorCopy( verts[2].xyz, verts[1].xyz );
 			
 			//verts[1].xyz[0] += 3.0f;

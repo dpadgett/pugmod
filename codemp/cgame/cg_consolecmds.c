@@ -312,6 +312,13 @@ static void CG_demopos_f(void)
 }
 
 typedef struct {
+	double		coefficient[3];
+	vec4_t		csi_coeff;   //cubic spline interpolation coefficients for time
+} newCam_t;
+
+newCam_t newcam[50];
+
+typedef struct {
 	vec3_t		origin;
 	vec3_t		angle;
 	int			time;
@@ -376,6 +383,20 @@ static void rowReduce() {
 			}
 }
 
+// this could be sped up with memoization
+static double factorial(int n) {
+	double product = 1;
+	int i;
+	for (i = 2; i <= n; i++) {
+		product *= i;
+	}
+	return product;
+}
+
+static double choose(int numerator, int denominator) {
+	return factorial(numerator) / factorial(denominator) / factorial(numerator - denominator);
+}
+
 #define TIMEDIV 1000
 // recalculate cubic spline interpolation coefficients for cam paths
 /*static */void reCalc() {
@@ -383,6 +404,123 @@ static void rowReduce() {
 	for( k=0; k<3; k++ )
 	{
 		double deltaT;
+
+		{
+			CG_Printf("curCam %d\n", curCam);
+			for (i = 0; i < curCam; i++) {
+				newcam[i].coefficient[k] = cam[i].origin[k] * choose(curCam - 1, i);
+				CG_Printf("cam %d axis %d coefficient %lf\n", i, k, newcam[i].coefficient[k]);
+			}
+
+			// ******************************** FIX ME PLEASE ***************************************
+
+			curRow = 0;
+			memset( theMatrix[0], 0, sizeof( theMatrix ) );
+			for( i=0; i<curCam-1; i++ )
+			{
+				double deltaT = (double)(cam[i+1].time - cam[i].time) / (double) (cam[curCam - 1].time - cam[0].time);
+				double deltaD = (double)(1 / (double) (curCam - 1));
+				j=0;
+				//runs through first point
+				//guess what? ive decided it's (0,0) kthx.
+				theMatrix[curRow][i*4+j++] = 0;//(((double)cam[i].time))*(((double)cam[i].time))*(((double)cam[i].time));
+				theMatrix[curRow][i*4+j++] = 0;//(((double)cam[i].time))*(((double)cam[i].time));
+				theMatrix[curRow][i*4+j++] = 0;//(((double)cam[i].time));
+				theMatrix[curRow][i*4+j++] = 1;
+				theMatrix[curRow++][(curCam-1)*4+4] = 0;//cam[i].origin[k];
+			
+				j=0;
+				//runs through second point
+				//doodz we're makin dese thangs unit doodz so it b leeter :>
+				theMatrix[curRow][i*4+j++] = (((double)deltaT))*(((double)deltaT))*(((double)deltaT));
+				theMatrix[curRow][i*4+j++] = (((double)deltaT))*(((double)deltaT));
+				theMatrix[curRow][i*4+j++] = (((double)deltaT));
+				theMatrix[curRow][i*4+j++] = 1;
+				theMatrix[curRow++][(curCam-1)*4+4] = deltaD;
+			
+				j=0;
+				//first derivitives are equal
+				theMatrix[curRow][i*4+j++] = (((double)deltaT))*(((double)deltaT))*3;
+				theMatrix[curRow][i*4+j++] = (((double)deltaT))*2;
+				theMatrix[curRow][i*4+j++] = 1;
+				theMatrix[curRow][i*4+j++] = 0;
+				theMatrix[curRow][i*4+j++] = 0;//-(((double)deltaT))*(((double)deltaT))*3;
+				theMatrix[curRow][i*4+j++] = 0;//-(((double)deltaT))*2;
+				theMatrix[curRow][i*4+j++] = -1;
+				theMatrix[curRow][i*4+j++] = 0;
+				theMatrix[curRow++][(curCam-1)*4+4] = 0;
+			
+				j=0;
+				//second derivitives are equal
+				theMatrix[curRow][i*4+j++] = (((double)deltaT))*6;
+				theMatrix[curRow][i*4+j++] = 2;
+				theMatrix[curRow][i*4+j++] = 0;
+				theMatrix[curRow][i*4+j++] = 0;
+				theMatrix[curRow][i*4+j++] = 0;//-(((double)deltaT))*6;
+				theMatrix[curRow][i*4+j++] = -2;
+				theMatrix[curRow][i*4+j++] = 0;
+				theMatrix[curRow][i*4+j++] = 0;
+				theMatrix[curRow++][(curCam-1)*4+4] = 0;
+			}
+			//4 more equations are needed to have a solvable matrix (there should be n-1 splines)
+		
+			j=0;
+			//second derivitive at the end is zero
+			{
+				double deltaT = (double)(cam[curCam - 1].time - cam[curCam - 2].time) / (double) (cam[curCam - 1].time - cam[0].time);
+				double deltaD = (double)(1 / (double) curCam);
+				theMatrix[curRow][(curCam-1)*4+j++] = (((double)deltaT))*6;
+				theMatrix[curRow][(curCam-1)*4+j++] = 2;
+				theMatrix[curRow][(curCam-1)*4+j++] = 0;
+				theMatrix[curRow][(curCam-1)*4+j++] = 0;
+				theMatrix[curRow++][(curCam-1)*4+4] = 0;
+			}
+		
+			j=0;
+			//second derivitive at the beginning is zero
+			theMatrix[curRow][j++] = 0;//(((double)cam[0].time))*6;
+			theMatrix[curRow][j++] = 2;
+			theMatrix[curRow][j++] = 0;
+			theMatrix[curRow][j++] = 0;
+			theMatrix[curRow++][(curCam-1)*4+4] = 0;
+		
+			j=0;
+			//runs through first point
+			theMatrix[curRow][(curCam-1)*4+j++] = 0;//(((double)cam[curCam-1].time)/TIMEDIV)*(((double)cam[curCam-1].time)/TIMEDIV)*(((double)cam[curCam-1].time)/TIMEDIV);
+			theMatrix[curRow][(curCam-1)*4+j++] = 0;//(((double)cam[curCam-1].time)/TIMEDIV)*(((double)cam[curCam-1].time)/TIMEDIV);
+			theMatrix[curRow][(curCam-1)*4+j++] = 0;//(((double)cam[curCam-1].time)/TIMEDIV);
+			theMatrix[curRow][(curCam-1)*4+j++] = 1;
+			theMatrix[curRow++][(curCam-1)*4+4] = 0;//cam[(curCam-1)].origin[k];
+		
+			// deltaT = (double)(cam[curCam].time - cam[curCam-1].time);
+			j=0;
+			//runs through second point
+			//pretty sure that's supposed to say Last point... =/
+			{
+				double deltaT = (double)(cam[curCam - 1].time - cam[curCam - 2].time) / (double) (cam[curCam - 1].time - cam[0].time);
+				double deltaD = (double)(1 / (double) (curCam - 1));
+				theMatrix[curRow][(curCam-1)*4+j++] = (((double)deltaT))*(((double)deltaT))*(((double)deltaT));
+				theMatrix[curRow][(curCam-1)*4+j++] = (((double)deltaT))*(((double)deltaT));
+				theMatrix[curRow][(curCam-1)*4+j++] = (((double)deltaT));
+				theMatrix[curRow][(curCam-1)*4+j++] = 1;
+				theMatrix[curRow++][(curCam-1)*4+4] = deltaD;
+			}
+		
+			numRows = curRow;
+			numCols = curCam*4+1;
+			rowReduce();
+		
+			for( i=0; i<curCam; i++ )
+			{
+				newcam[i].csi_coeff[0] = theMatrix[i*4][curCam*4];
+				newcam[i].csi_coeff[1] = theMatrix[i*4+1][curCam*4];
+				newcam[i].csi_coeff[2] = theMatrix[i*4+2][curCam*4];
+				newcam[i].csi_coeff[3] = theMatrix[i*4+3][curCam*4];
+			}
+
+			// ************************************* FIX THE ABOVE PLEASE *****************************************
+		}
+
 		curRow = 0;
 		memset( theMatrix[0], 0, sizeof( theMatrix ) );
 		for( i=0; i<curCam-1; i++ )
@@ -619,10 +757,11 @@ static void CG_smoothcam_f(void)
 	}
 	cam[curCam].time = ( atoi( time ) * 60000 + atof( sec ) * 1000 );
 	
+	curCam++;
+
 	reCalc();
 	
 	CG_Printf("Added Cam Location %d.\n",curCam);
-	curCam++;
 }
 
 static void CG_insertcam_f(void)
@@ -665,10 +804,11 @@ static void CG_insertcam_f(void)
 	}
 	cam[insertCam].time = ( atoi( time ) * 60000 + atof( sec ) * 1000 );
 	
+	curCam++;
+
 	reCalc();
 	
 	CG_Printf("Inserted Cam Location %d.\n",insertCam);
-	curCam++;
 }
 
 static void CG_removecam_f(void)
@@ -691,10 +831,11 @@ static void CG_removecam_f(void)
 		cam[ j ] = cam[ j+1 ];
 	}
 	
+	curCam--;
+
 	reCalc();
 	
 	CG_Printf("Removed Cam Location %d.\n",removeCam);
-	curCam--;
 }
 
 static void CG_removeallcams_f(void)
